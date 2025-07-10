@@ -53,6 +53,8 @@ Base.haskey(f::SVOFilter, key) = haskey(f.metadata, key)
 Base.keys(f::SVOFilter) = keys(f.metadata)
 Base.values(f::SVOFilter) = values(f.metadata)
 
+reference_wavelength(f::SVOFilter) = haskey(f, "WavelengthRef") ? f["WavelengthRef"] : @invoke reference_wavelength(f::AbstractFilter)
+
 
 """
     get_filter(filtername::AbstractString, magsys::Symbol=:Vega)
