@@ -375,7 +375,6 @@ F_\\nu = \\frac{10^5}{10^{-8} \\, c} \\, \\lambda^2_r \\, F_\\lambda
 
 where ``c`` is the speed of light in *m/s* and ``\\lambda_r`` is the reference wavelength (`λref`) in *Angstroms*. If providing an [`AbstractFilter`](@ref PhotometricFilters.AbstractFilter) as the second argument, the reference wavelength will be automatically computed with [`reference_wavelength`](@ref PhotometricFilters.reference_wavelength).
 """
-
 F_nu(Fλ::SpectralFluxDensity, λref) = 25370985150//760603 * _ustrip(u"angstrom", λref)^2 * ustrip(u"erg/s/cm^2/angstrom", Fλ) * u"Jy" # Prefactor is 1e5 / (c / 10^8), c = 2.99792458e8 m s^-1, see PR #22
 F_nu(Fλ::SpectralFluxDensity, f::AbstractFilter) = F_nu(Fλ, reference_wavelength(f))
 
