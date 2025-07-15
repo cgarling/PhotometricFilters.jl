@@ -417,6 +417,7 @@ julia> using Unitful
 
 julia> f = PhotometricFilter(1000:2000, vcat(fill(0.25, 250), fill(0.5, 500), fill(0.25, 251))) # Specify only wavelength and throughput
 1001-element PhotometricFilter{Float64}: nothing
+ reference wave.: 1478.1028279485677 Å
  min. wave.: 1000 Å
  max. wave.: 2000 Å
  effective wave.: 1603.6927025575474 Å
