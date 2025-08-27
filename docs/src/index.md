@@ -85,33 +85,10 @@ zeropoint_Jy
 zeropoint_mag
 ```
 
-!!! info 
-    The above methods are public and exported. Their implementations dispatch to the below internal, unexported functions. If you wish to use the below methods, you should explicitly import them, with `using PhotometricFilters: zeropoint_flux_AB` for example.
-
-```@docs
-PhotometricFilters.zeropoint_flux_AB
-PhotometricFilters.zeropoint_mag_AB
-PhotometricFilters.zeropoint_Jy_AB
-PhotometricFilters.zeropoint_flux_ST
-PhotometricFilters.zeropoint_mag_ST
-PhotometricFilters.zeropoint_Jy_ST
-PhotometricFilters.zeropoint_flux_Vega
-PhotometricFilters.zeropoint_mag_Vega
-PhotometricFilters.zeropoint_Jy_Vega
-```
-
 ## Synthetic Photometry
 
 ```@docs
 magnitude
-```
-
-`magnitude` dispatches to the following unexported methods.
-
-```@docs
-magnitude_AB
-magnitude_ST
-magnitude_Vega
 ```
 
 ## Statistics
