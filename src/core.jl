@@ -607,57 +607,27 @@ true
 zeropoint_mag(f::AbstractFilter, v::Vega) = -25//10 * log10(ustrip(zeropoint_flux(f, v)))
 
 """
-    magnitude(f::AbstractFilter, v::Vega, wavelengths, flux)
-Calculates the Vega magnitude in the given filter `f` from a spectrum defined by arrays `wavelengths` and `flux`, both of which must have valid Unitful units.
-
-By definition, this method will return 0 for Vega.
+    magnitude(f::AbstractFilter, T::ZeropointSystem, wavelengths, flux)
+Calculates the magnitude in the given filter `f` in the photometric system `T` from a spectrum defined by arrays `wavelengths` and `flux`, both of which must have valid Unitful units.
 
 ```jldoctest
-julia> using PhotometricFilters: magnitude, Vega, HST_WFC3_F110W
-
-julia> v = Vega(); 
-
-julia> isapprox(magnitude(HST_WFC3_F110W(), v, v.wave, v.flux), 0; rtol=1e-3)
-true
-```
-"""
-function magnitude(f::AbstractFilter, v::Vega, wavelengths, flux)
-    fbar = ustrip(u"erg/s/cm^2/angstrom", mean_flux_density(f, wavelengths, F_lambda.(flux, Ref(f))))
-    return -25//10 * log10(fbar) - zeropoint_mag(f, v)
-end
-"""
-    magnitude(f::AbstractFilter, ::AB, wavelengths, flux)
-Calculates the AB magnitude in the given filter `f` from a spectrum defined by arrays `wavelengths` and `flux`, both of which must have valid Unitful units.
-
-```jldoctest
-julia> using PhotometricFilters: magnitude, Vega, HST_WFC3_F110W
+julia> using PhotometricFilters: magnitude, Vega, ST, AB, HST_WFC3_F110W
 
 julia> v = Vega();
 
 julia> isapprox(magnitude(HST_WFC3_F110W(), AB(), v.wave, v.flux), 0.7519497; rtol=1e-3)
 true
-```
-"""
-function magnitude(f::AbstractFilter, a::AB, wavelengths, flux)
-    fbar = ustrip(u"erg/s/cm^2/angstrom", mean_flux_density(f, wavelengths, F_lambda.(flux, Ref(f))))
-    return -25//10 * log10(fbar) - zeropoint_mag(f, a)
-end
-"""
-    magnitude(f::AbstractFilter, ::ST, wavelengths, flux)
-Calculates the ST magnitude in the given filter `f` from a spectrum defined by arrays `wavelengths` and `flux`, both of which must have valid Unitful units.
-
-```jldoctest
-julia> using PhotometricFilters: magnitude, ST, Vega, HST_WFC3_F110W
-
-julia> v = Vega();
 
 julia> isapprox(magnitude(HST_WFC3_F110W(), ST(), v.wave, v.flux), 2.372748728; rtol=1e-3)
 true
+
+julia> isapprox(magnitude(HST_WFC3_F110W(), v, v.wave, v.flux), 0; rtol=1e-3)
+true
 ```
 """
-function magnitude(f::AbstractFilter, s::ST, wavelengths, flux)
+function magnitude(f::AbstractFilter, T::ZeropointSystem, wavelengths, flux)
     fbar = ustrip(u"erg/s/cm^2/angstrom", mean_flux_density(f, wavelengths, F_lambda.(flux, Ref(f))))
-    return -25//10 * log10(fbar) - zeropoint_mag(f, s)
+    return -25//10 * log10(fbar) - zeropoint_mag(f, T)
 end
 
 ############################################################
