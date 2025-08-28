@@ -26,6 +26,9 @@ function Base.parse(::Type{DetectorType}, s::AbstractString)
     end
 end
 
+"""
+Abstract supertype for zeropoint systems like [`AB`](@ref), [`ST`](@ref), and [`Vega`](@ref). Subtypes should implement [`zeropoint_mag`](@ref), [`zeropoint_flux`](@ref), and [`zeropoint_Jy`](@ref).
+"""
 abstract type ZeropointSystem end
 """
     Vega(wave, flux, name::String) <: ZeropointSystem
