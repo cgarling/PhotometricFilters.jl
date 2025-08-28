@@ -72,7 +72,7 @@ F_lambda
 We utilize multiple dispatch to support dynamic calculation of zeropoints in the magnitude systems below.
 
 ```@docs
-PhotometricFilters.ZeropointSystem
+PhotometricFilters.MagnitudeSystem
 Vega
 ST
 AB
