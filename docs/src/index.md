@@ -73,9 +73,9 @@ We utilize multiple dispatch to support dynamic calculation of zeropoints in the
 
 ```@docs
 PhotometricFilters.MagnitudeSystem
-Vega
-ST
 AB
+ST
+Vega
 ```
 
 Zeropoints can be computed with methods below.
