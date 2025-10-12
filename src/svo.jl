@@ -150,6 +150,7 @@ end
 
 """
     update_filters()
+
 Updates the SVO filters in the filter cache located at `PhotometricFilters.filter_cache`. 
 """
 function update_filters()
@@ -169,6 +170,22 @@ function update_filters()
         catch e
             mv(backup, f; force=true)
             @warn "Failed to update filter $f" exception=(e, catch_backtrace())
+        end
+    end
+end
+
+"""
+    clear_filters()
+
+Removes the SVO filters in the filter cache located at `PhotometricFilters.filter_cache`. 
+"""
+function clear_filters()
+    files = filter(isfile, readdir(filter_cache; join=true))
+    for f in files
+        try
+            rm(f)
+        catch e
+            @warn "Failed to remove filter $f" exception=(e, catch_backtrace())
         end
     end
 end
